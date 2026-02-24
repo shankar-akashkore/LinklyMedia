@@ -1,0 +1,22 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>User<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+1.Register
+2.Login
+3.RefreshTokens
+4.Logout
+5.GetUserProfile//////////////even gets user profile
+6.UpdateUserProfile/////even updates partner profile
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Partner<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+1.AddBillboard
+2.DeleteBillboard
+3.GetAllListings
+4.UpdateBillboard
+5.Booking  (IncomingOrders) ---------------once needed to be reviewed while integrating back and front end
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Billboard<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+1.GetBillboards
+2.AddToCart
+3.RemoveFromCart
+4.GetBillboardByID
+5.GetReviewRatingCustomerIdByBillboardID
+5.AddReviewRatingCustomerIdByUserId
+6.SearchBillboards
+7.Like billboard
