@@ -217,7 +217,7 @@ export default function BillboardsDetails() {
                   <img
                     src="/images/billboard-index.png"
                     alt="Media Type"
-                    className="h-12 w-16"
+                    className="h-10 w-14"
                   />
                   <div className="flex flex-col">
                     <span className="text-xs tracking-wide text-gray-500">
@@ -229,8 +229,8 @@ export default function BillboardsDetails() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <Lightbulb size={40} weight="light" />
+                <div className="flex items-start gap-4 pl-3">
+                  <Lightbulb size={38} weight="light" />
                   <div className="flex flex-col">
                     <span className="text-xs tracking-wide text-gray-500">
                       LIGHTING

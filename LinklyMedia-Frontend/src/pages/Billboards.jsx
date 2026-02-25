@@ -234,9 +234,24 @@ export default function Billboards() {
 
                         <button
                           onClick={() => navigate(`/billboards/${billboardId}`)}
-                          className="mt-4 inline-flex items-center justify-center rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-[#507c88] transition-colors duration-200 hover:bg-[#507c88] hover:text-white"
-                        >
-                          View Details
+                          className="mt-4 inline-flex items-center justify-center rounded-full 
+                          relative isolate gap-2
+                          px-1 py-1
+                          text-xs sm:text-base font-normal tracking-wide font-[var(--font-barriecito)]
+                          text-[#507c88] bg-white
+                          border-1 border-[#507c88] rounded-full
+                          overflow-hidden
+                          transition-all duration-300
+                          hover:text-white
+                          active:scale-95
+            
+                          before:absolute before:inset-0
+                          before:bg-[#507c88]
+                          before:translate-y-full
+                          before:transition-transform before:duration-300
+                          before:z-0
+                          hover:before:translate-y-0">
+                          <span className="relative z-10">View Details</span>
                         </button>
                       </div>
                     </article>

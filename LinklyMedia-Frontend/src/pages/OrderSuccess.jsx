@@ -46,14 +46,14 @@ const OrderSuccess = () => {
         {/* Buttons */}
         <div className="flex flex-col gap-3">
           <button
-            onClick={() => navigate("/orders")}
-            className="w-full bg-[#507c88] text-white py-3 rounded-lg font-semibold hover:bg-[#3d6472] transition"
+            onClick={() => navigate("/myorders")}
+            className="w-full bg-[#507c88] text-white py-3 rounded-full font-medium hover:bg-[#3d6472] transition"
           >
             View My Orders
           </button>
           <button
             onClick={() => navigate("/")}
-            className="w-full border border-gray-200 text-gray-600 py-3 rounded-lg font-semibold hover:bg-gray-50 transition"
+            className="w-full border border-gray-200 text-gray-600 py-3 rounded-full font-medium hover:bg-gray-50 transition"
           >
             Back to Home
           </button>
