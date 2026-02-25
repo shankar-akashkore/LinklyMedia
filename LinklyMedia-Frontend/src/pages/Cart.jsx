@@ -67,10 +67,10 @@ export default function Cart() {
   const total = subtotal;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 py-8 px-4 sm:px-6">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 py-6 px-3 sm:py-8 sm:px-6 pb-28 sm:pb-8">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
-        <div className="mb-6 rounded-2xl bg-white/80 backdrop-blur border border-slate-200 px-5 py-4 shadow-sm">
+        <div className="mb-4 sm:mb-6 rounded-2xl bg-white/80 backdrop-blur border border-slate-200 px-4 sm:px-5 py-4 shadow-sm">
           <h1 className="text-2xl sm:text-3xl font-medium text-slate-900 tracking-tight">
             Your Cart
           </h1>
@@ -110,7 +110,7 @@ export default function Cart() {
                 </button>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {cartItems.map((item) => {
                   const days = getDurationDays(item);
                   const itemTotal = getItemTotal(item);
@@ -118,25 +118,25 @@ export default function Cart() {
                   return (
                     <div
                       key={item.cartItemId}
-                      className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+                      className="bg-white border border-slate-200 rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
                     >
                       <div className="flex flex-col sm:flex-row gap-4">
                         {/* Image */}
                         <img
                           src={item.coverImage}
                           alt={item.title}
-                          className="w-full sm:w-40 h-28 object-cover rounded-xl shrink-0 border border-slate-200"
+                          className="w-full sm:w-40 h-24 sm:h-28 object-cover rounded-xl shrink-0 border border-slate-200"
                         />
 
                         {/* Details */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between gap-2">
-                            <h2 className="text-base sm:text-lg font-bold text-slate-800 truncate">
+                            <h2 className="text-[15px] sm:text-lg font-bold text-slate-800 break-words pr-1">
                               {item.title}
                             </h2>
                             <button
                               onClick={() => handleRemove(item.cartItemId)}
-                              className="shrink-0 p-1.5 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition"
+                              className="shrink-0 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition"
                             >
                               <Trash size={16} />
                             </button>
@@ -145,7 +145,7 @@ export default function Cart() {
                           {/* Dates */}
                           {item.fromdate && item.todate && (
                             <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                              <span className="text-xs text-slate-500">
+                              <span className="text-xs text-slate-500 break-words">
                                 {fmt(item.fromdate)} → {fmt(item.todate)}
                               </span>
                               {days && (
@@ -157,7 +157,7 @@ export default function Cart() {
                           )}
 
                           {/* Material / Mounting tags */}
-                          <div className="flex gap-2 mt-2 flex-wrap">
+                          <div className="flex gap-1.5 sm:gap-2 mt-2 flex-wrap">
                             {item.selectedmaterial && (
                               <span className="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-medium">
                                 📄 {item.selectedmaterial}
@@ -171,7 +171,7 @@ export default function Cart() {
                           </div>
 
                           {/* Price breakdown */}
-                          <div className="flex items-end justify-between mt-3">
+                          <div className="flex flex-col sm:flex-row sm:items-end justify-between mt-3 gap-2">
                             <div className="text-xs text-slate-500 space-y-0.5">
                               {item.price > 0 && (
                                 <p>
@@ -191,7 +191,7 @@ export default function Cart() {
                                 </p>
                               )}
                             </div>
-                            <p className="text-xl font-extrabold text-[#2c6e7d]">
+                            <p className="text-lg sm:text-xl font-extrabold text-[#2c6e7d] self-end sm:self-auto">
                               ₹{Number(itemTotal).toLocaleString()}
                             </p>
                           </div>
@@ -205,7 +205,7 @@ export default function Cart() {
           </div>
 
           {/* ── Order Summary ── */}
-          <div className="w-full xl:w-[340px] shrink-0 sticky top-6">
+          <div className="hidden xl:block w-full xl:w-[340px] shrink-0 sticky top-6">
             <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-5">
               <h2 className="text-base font-bold text-slate-800 mb-4">
                 Order Summary
@@ -230,7 +230,7 @@ export default function Cart() {
               <button
                 onClick={() => navigate("/preview-checkout")}
                 disabled={cartItems.length === 0}
-                className="w-full mt-5 py-3  font-semibold text-sm rounded-full transition disabled:opacity-40 disabled:cursor-not-allowed
+                className="w-full mt-5 py-3 font-semibold text-sm rounded-full transition disabled:opacity-40 disabled:cursor-not-allowed
                 items-center justify-center
                 relative isolate gap-2
                 px-1 py-1
@@ -256,6 +256,27 @@ export default function Cart() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile Bottom Checkout Bar */}
+      <div className="xl:hidden fixed bottom-0 inset-x-0 z-20 border-t border-slate-200 bg-white/95 backdrop-blur px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[11px] text-slate-500">
+              {cartItems.length} item{cartItems.length !== 1 ? "s" : ""}
+            </p>
+            <p className="text-lg font-bold text-[#2c6e7d] leading-tight">
+              ₹{total.toLocaleString()}
+            </p>
+          </div>
+          <button
+            onClick={() => navigate("/preview-checkout")}
+            disabled={cartItems.length === 0}
+            className="shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-[#507c88] disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Checkout
+          </button>
         </div>
       </div>
     </div>
