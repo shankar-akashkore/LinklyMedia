@@ -26,93 +26,6 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
-const PhoneIllustration = () => (
-  <svg
-    viewBox="0 0 340 390"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-full max-w-xs drop-shadow-2xl"
-  >
-    <ellipse cx="150" cy="345" rx="85" ry="12" fill="#d1d5db" opacity="0.5" />
-    <rect
-      x="55"
-      y="25"
-      width="190"
-      height="305"
-      rx="30"
-      fill="white"
-      stroke="#e5e7eb"
-      strokeWidth="2"
-    />
-    <rect x="115" y="25" width="70" height="18" rx="9" fill="#e5e7eb" />
-    <rect
-      x="78"
-      y="62"
-      width="144"
-      height="100"
-      rx="14"
-      fill="#f8fafc"
-      stroke="#e5e7eb"
-      strokeWidth="1.5"
-    />
-    <circle cx="120" cy="112" r="18" fill="#d1d5db" />
-    <circle cx="138" cy="112" r="18" fill="#c7d2fe" />
-    <circle cx="156" cy="112" r="18" fill="#4f46e5" />
-    <circle cx="88" cy="188" r="5.5" fill="#93c5fd" />
-    <circle cx="103" cy="188" r="5.5" fill="#93c5fd" />
-    <circle cx="118" cy="188" r="5.5" fill="#93c5fd" />
-    <line
-      x1="134"
-      y1="188"
-      x2="196"
-      y2="188"
-      stroke="#e5e7eb"
-      strokeWidth="3"
-      strokeLinecap="round"
-    />
-    <circle cx="88" cy="212" r="5.5" fill="#a5b4fc" />
-    <circle cx="103" cy="212" r="5.5" fill="#a5b4fc" />
-    <circle cx="118" cy="212" r="5.5" fill="#a5b4fc" />
-    <line
-      x1="134"
-      y1="212"
-      x2="196"
-      y2="212"
-      stroke="#e5e7eb"
-      strokeWidth="3"
-      strokeLinecap="round"
-    />
-    <rect x="128" y="258" width="74" height="28" rx="9" fill="#4f46e5" />
-    <rect x="120" y="310" width="60" height="5" rx="3" fill="#e5e7eb" />
-    <ellipse cx="263" cy="345" rx="22" ry="7" fill="#d1d5db" opacity="0.6" />
-    <ellipse cx="254" cy="338" rx="13" ry="8" fill="#111827" />
-    <ellipse cx="274" cy="338" rx="13" ry="8" fill="#111827" />
-    <rect x="246" y="275" width="16" height="64" rx="7" fill="#1e1b4b" />
-    <rect x="266" y="275" width="16" height="64" rx="7" fill="#1e1b4b" />
-    <rect x="240" y="210" width="46" height="68" rx="12" fill="#6366f1" />
-    <path
-      d="M240 222 Q220 245 224 268"
-      stroke="#fbbf7c"
-      strokeWidth="11"
-      strokeLinecap="round"
-      fill="none"
-    />
-    <path
-      d="M286 222 Q302 240 296 262"
-      stroke="#fbbf7c"
-      strokeWidth="11"
-      strokeLinecap="round"
-      fill="none"
-    />
-    <rect x="256" y="195" width="14" height="16" rx="5" fill="#fbbf7c" />
-    <circle cx="263" cy="180" r="22" fill="#fbbf7c" />
-    <path
-      d="M241 172 Q242 148 263 148 Q284 148 285 172 Q278 162 263 163 Q248 162 241 172Z"
-      fill="#1e1b4b"
-    />
-  </svg>
-);
-
 const EyeIcon = ({ open }) =>
   open ? (
     <svg
@@ -233,15 +146,15 @@ export default function SignUp() {
 
   return (
     <>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap'); * { font-family: 'Nunito', sans-serif !important; }`}</style>
-
-      <div className="flex min-h-screen w-full">
-        <div className="w-1/2 min-h-screen bg-white flex flex-col justify-center px-16 py-10 overflow-y-auto">
+      {/* <style>{`@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap'); * { font-family: 'Nunito', sans-serif !important; }`}</style> */}
+      <div className="w-full font-light text-sm text-center bg-[#507c88] h-[40px] text-white pt-2">LinklyMedia | Outdoor Advertising Platform</div>
+      <div className="flex flex-col lg:flex-row min-h-screen w-full">
+        <div className="w-full lg:w-1/2 min-h-screen bg-white flex flex-col justify-center px-4 sm:px-8 lg:px-16 py-6 sm:py-10 overflow-y-auto">
           <div className="w-full max-w-md mx-auto">
-            <h1 className="text-[2rem] font-black text-gray-900 leading-tight tracking-tight mb-1">
+            <h1 className="text-3xl sm:text-[2rem] font-semibold text-gray-900 leading-tight tracking-tight mb-1 font-[var(--font-barriecito)]">
               Create Account
             </h1>
-            <p className="text-sm text-gray-400 font-medium mb-8">
+            <p className="text-sm text-gray-400 font-medium mb-6 sm:mb-8">
               Start your journey with us today.
             </p>
 
@@ -256,7 +169,7 @@ export default function SignUp() {
               noValidate
               className="flex flex-col gap-4"
             >
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="First Name" error={errors.firstname?.message}>
                   <input
                     {...register("firstname")}
@@ -273,7 +186,7 @@ export default function SignUp() {
                 </Field>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="DOB" error={errors.dob?.message}>
                   <input
                     type="date"
@@ -307,7 +220,7 @@ export default function SignUp() {
                 />
               </Field>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="Password" error={errors.password?.message}>
                   <div className="relative">
                     <input
@@ -379,7 +292,7 @@ export default function SignUp() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-1 py-3 rounded-xl bg-teal-700 hover:bg-teal-800 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.985] text-white font-bold text-base tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-teal-700/20 transition-all duration-200"
+                className="w-full mt-1 py-3 rounded-full bg-[#507c88]/90 hover:bg-[#507c88]/60 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.985] text-white font-semibold text-sm sm:text-base tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-teal-700/20 transition-all duration-200"
               >
                 {loading ? (
                   <>
@@ -437,19 +350,26 @@ export default function SignUp() {
           </div>
         </div>
 
-        <div className="w-1/2 min-h-screen bg-gray-50 flex flex-col items-center justify-center px-10 py-10">
+        <div className="hidden lg:flex lg:w-1/2 min-h-screen bg-gray-50 flex-col items-center justify-center px-10 py-10 ">
           <div className="flex flex-col items-center max-w-sm w-full">
-            <PhoneIllustration />
-            <h2 className="mt-8 text-xl font-extrabold text-gray-800 text-center tracking-tight">
-              Manage your projects with ease
+            <img
+              src="/images/Log1.png"
+              alt="Signup visual"
+              className="w-full max-w-xs object-contain drop-shadow-2xl"
+            />
+            <h2 className="mt-8 text-xl font-semibold text-gray-800 text-center tracking-tight">
+            Build your next campaign with us
             </h2>
             <p className="mt-2 text-sm text-gray-400 font-medium text-center max-w-xs leading-relaxed">
-              Connect with premium billboard inventory across India and grow
-              your reach.
+            Sign up and access premium billboard spaces nationwide.
             </p>
           </div>
         </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br>
+        
       </div>
+
+      
     </>
   );
 }

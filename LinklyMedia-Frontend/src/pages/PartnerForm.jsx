@@ -727,9 +727,9 @@ const PartnerIllustration = () => (
 
 // ─── Step Indicator ───────────────────────────────────────────────────────────
 const StepIndicator = () => (
-  <div className="flex items-center gap-2 mb-8">
+  <div className="flex items-center gap-2 mb-6 sm:mb-8 overflow-x-auto pb-1">
     <div className="flex items-center gap-1.5">
-      <div className="w-6 h-6 rounded-full bg-teal-600 flex items-center justify-center">
+      <div className="w-6 h-6 rounded-full bg-[#507c88] flex items-center justify-center">
         <svg
           className="w-3 h-3 text-white"
           fill="none"
@@ -744,21 +744,27 @@ const StepIndicator = () => (
           />
         </svg>
       </div>
-      <span className="text-[12px] font-semibold text-teal-600">Account</span>
+      <span className="text-[11px] sm:text-[12px] font-semibold text-teal-600 whitespace-nowrap">
+        Account
+      </span>
     </div>
     <div className="flex-1 h-[2px] bg-teal-200 rounded-full" />
     <div className="flex items-center gap-1.5">
-      <div className="w-6 h-6 rounded-full bg-teal-600 ring-4 ring-teal-100 flex items-center justify-center">
+      <div className="w-6 h-6 rounded-full bg-[#507c88] ring-4 ring-teal-100 flex items-center justify-center">
         <span className="text-[10px] font-black text-white">2</span>
       </div>
-      <span className="text-[12px] font-black text-teal-700">Business</span>
+      <span className="text-[11px] sm:text-[12px] font-black text-teal-700 whitespace-nowrap">
+        Business
+      </span>
     </div>
     <div className="flex-1 h-[2px] bg-gray-200 rounded-full" />
     <div className="flex items-center gap-1.5">
-      <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
-        <span className="text-[10px] font-bold text-gray-500">3</span>
+      <div className="w-6 h-6 rounded-full bg-[#507c88] flex items-center justify-center">
+        <span className="text-[10px] font-bold text-gray-100">3</span>
       </div>
-      <span className="text-[12px] font-semibold text-gray-400">Cities</span>
+      <span className="text-[11px] sm:text-[12px] font-semibold text-gray-400 whitespace-nowrap">
+        Cities
+      </span>
     </div>
   </div>
 );
@@ -909,11 +915,11 @@ export default function PartnerForm() {
 
   return (
     <>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap'); * { font-family: 'Nunito', sans-serif !important; }`}</style>
-
-      <div className="flex min-h-screen w-full">
+      {/* <style>{`@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap'); * { font-family: 'Nunito', sans-serif !important; }`}</style> */}
+      <div className="w-full font-light text-sm text-center bg-[#507c88] h-[40px] text-white pt-2">LinklyMedia | Outdoor Advertising Platform</div>
+      <div className="flex flex-col lg:flex-row min-h-screen w-full">
         {/* ── LEFT: Form Panel ── */}
-        <div className="w-1/2 min-h-screen bg-white flex flex-col justify-start px-16 py-10 overflow-y-auto">
+        <div className="w-full lg:w-1/2 min-h-screen bg-white flex flex-col justify-start px-4 sm:px-8 lg:px-16 py-6 sm:py-10 overflow-y-auto">
           <div className="w-full max-w-md mx-auto">
             <button
               type="button"
@@ -938,10 +944,10 @@ export default function PartnerForm() {
 
             <StepIndicator />
 
-            <h1 className="text-[2rem] font-black text-gray-900 leading-tight tracking-tight mb-1">
+            <h1 className="text-3xl sm:text-[2rem] font-semibold text-gray-900 leading-tight tracking-tight mb-1">
               Business Details
             </h1>
-            <p className="text-sm text-gray-400 font-medium mb-8">
+            <p className="text-sm text-gray-400 font-medium mb-6 sm:mb-8">
               Tell us about your business so we can verify your partner account.
             </p>
 
@@ -957,11 +963,11 @@ export default function PartnerForm() {
               className="flex flex-col gap-4"
             >
               {/* ── Business Info ── */}
-              <SectionTitle
+              {/* <SectionTitle
                 icon="🏢"
                 title="Business Information"
                 subtitle="Core details about your company"
-              />
+              /> */}
 
               <Field label="Business Name" error={errors.businessname?.message}>
                 <input
@@ -1003,7 +1009,7 @@ export default function PartnerForm() {
                 </div>
               </Field>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field
                   label="GST Number"
                   error={errors.gstnumber?.message}
@@ -1031,11 +1037,15 @@ export default function PartnerForm() {
               </div>
 
               {/* ── Contact ── */}
-              <SectionTitle
-                icon="📞"
+              {/* <SectionTitle
                 title="Contact Information"
                 subtitle="How clients can reach your business"
-              />
+              /> */}
+              
+              <div className="pt-5">
+              <h1 className="font-semibold">Contact Information</h1>
+              <p className="text-xs text-gray-400">How clients can reach your business</p>
+              </div>
 
               <Field
                 label="Business Email"
@@ -1069,11 +1079,15 @@ export default function PartnerForm() {
               </Field>
 
               {/* ── Address ── */}
-              <SectionTitle
-                icon="📍"
+              {/* <SectionTitle
+            
                 title="Business Address"
                 subtitle="Registered address of your business"
-              />
+              /> */}
+              <div className="pt-5">
+              <h1 className="font-semibold">Business Address</h1>
+              <p className="text-xs text-gray-400">Registered address of your business</p>
+              </div>
 
               <Field label="Street / Area" error={errors.street?.message}>
                 <input
@@ -1083,7 +1097,7 @@ export default function PartnerForm() {
                 />
               </Field>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="City" error={errors.city?.message}>
                   <input
                     {...register("city")}
@@ -1101,7 +1115,7 @@ export default function PartnerForm() {
                 </Field>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="State" error={errors.state?.message}>
                   <div className="relative">
                     <select
@@ -1144,11 +1158,15 @@ export default function PartnerForm() {
               </div>
 
               {/* ── Bank Details ── */}
-              <SectionTitle
+              {/* <SectionTitle
                 icon="🏦"
                 title="Bank Details"
                 subtitle="For receiving payouts from bookings"
-              />
+              /> */}
+              <div className="pt-5">
+              <h1 className="font-semibold">Bank Details</h1>
+              <p className="text-xs text-gray-400">For receiving payouts from bookings</p>
+              </div>
 
               <div className="flex items-start gap-2.5 px-3.5 py-2.5 rounded-lg bg-blue-50 border border-blue-100">
                 <svg
@@ -1179,7 +1197,7 @@ export default function PartnerForm() {
                 />
               </Field>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="Bank Name" error={errors.bankname?.message}>
                   <input
                     {...register("bankname")}
@@ -1242,7 +1260,7 @@ export default function PartnerForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-1 py-3 rounded-xl bg-teal-700 hover:bg-teal-800 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.985] text-white font-bold text-base tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-teal-700/20 transition-all duration-200"
+                className="w-full mt-1 py-3 rounded-full bg-[#507c88]/90 hover:bg-[#507c88] disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.985] text-white font-bold text-sm sm:text-base tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-teal-700/20 transition-all duration-200"
               >
                 {loading ? (
                   <>
@@ -1301,10 +1319,10 @@ export default function PartnerForm() {
         </div>
 
         {/* ── RIGHT: Illustration Panel ── */}
-        <div className="w-1/2 min-h-screen bg-gray-50 flex flex-col items-center justify-center px-10 py-10 sticky top-0 self-start">
+        <div className="hidden lg:flex lg:w-1/2 min-h-screen bg-gray-50 flex-col items-center justify-center px-10 py-10 sticky top-0 self-start">
           <div className="flex flex-col items-center max-w-sm w-full">
             <PartnerIllustration />
-            <h2 className="mt-8 text-xl font-extrabold text-gray-800 text-center tracking-tight">
+            <h2 className="mt-8 text-xl font-semibold text-gray-800 text-center tracking-tight">
               Grow your billboard business
             </h2>
             <p className="mt-2 text-sm text-gray-400 font-medium text-center max-w-xs leading-relaxed">
@@ -1313,9 +1331,9 @@ export default function PartnerForm() {
             </p>
             <div className="mt-6 w-full max-w-xs flex flex-col gap-3">
               {[
-                { icon: "📊", text: "Real-time booking dashboard" },
-                { icon: "💰", text: "Transparent earnings & payouts" },
-                { icon: "🛡️", text: "Verified partner badge" },
+                { icon: "", text: "Real-time booking dashboard" },
+                { icon: "", text: "Transparent earnings & payouts" },
+                { icon: "", text: "Verified partner badge" },
               ].map((f) => (
                 <div
                   key={f.text}
@@ -1330,6 +1348,7 @@ export default function PartnerForm() {
             </div>
           </div>
         </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
     </>
   );

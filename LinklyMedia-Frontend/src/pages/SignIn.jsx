@@ -52,23 +52,25 @@ export default function Signin() {
   };
 
   return (
-    <div className="min-h-screen flex">
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#507c88]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#507c88]/5 rounded-full blur-3xl"></div>
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      <div className="w-full lg:w-1/2 flex items-start sm:items-center justify-center px-4 py-8 sm:p-8 bg-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-40 h-40 sm:w-64 sm:h-64 bg-[#507c88]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-56 h-56 sm:w-96 sm:h-96 bg-[#507c88]/5 rounded-full blur-3xl"></div>
 
         <div className="relative z-10 w-full max-w-md">
-          <div className="mb-10 animate-fade-in">
+          <div className="mb-8 sm:mb-10 animate-fade-in">
             {/* <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#507c88] to-[#3d5f6a] mb-6 shadow-lg shadow-[#507c88]/30">
               <Sparkles className="w-7 h-7 text-white" />
             </div> */}
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
               Welcome Back
             </h1>
-            <p className="text-gray-600">Sign in to continue your journey</p>
+            <p className="text-sm sm:text-base text-gray-600">
+              Sign in to continue your journey
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
             <div className="group animate-slide-up">
               <label
                 htmlFor="email"
@@ -81,7 +83,7 @@ export default function Signin() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#507c88] focus:border-transparent transition-all duration-300 hover:border-[#507c88]/50"
+                className="w-full px-4 py-3 sm:py-3.5 text-sm sm:text-base bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#507c88] focus:border-transparent transition-all duration-300 hover:border-[#507c88]/50"
                 placeholder="you@example.com"
                 required
               />
@@ -100,7 +102,7 @@ export default function Signin() {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#507c88] focus:border-transparent transition-all duration-300 hover:border-[#507c88]/50 pr-12"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm sm:text-base bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#507c88] focus:border-transparent transition-all duration-300 hover:border-[#507c88]/50 pr-12"
                   placeholder="••••••••"
                   required
                 />
@@ -118,7 +120,7 @@ export default function Signin() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between animate-slide-up animation-delay-400">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 animate-slide-up animation-delay-400">
               <label className="flex items-center cursor-pointer group">
                 <input
                   type="checkbox"
@@ -130,7 +132,7 @@ export default function Signin() {
               </label>
               <a
                 href="#"
-                className="text-sm text-[#507c88] hover:text-[#3d5f6a] transition-colors font-medium hover:underline"
+                className="text-sm text-[#507c88] hover:text-[#3d5f6a] transition-colors font-medium hover:underline self-start sm:self-auto"
               >
                 Forgot password?
               </a>
@@ -139,7 +141,7 @@ export default function Signin() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full group relative px-6 py-3.5 bg-[#507c88] to-[#3d5f6a] text-white rounded-full font-semibold shadow-lg shadow-[#507c88]/30 hover:shadow-[#507c88]/50 transition-all duration-300  active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed animate-slide-up animation-delay-600 overflow-hidden"
+              className="w-full group relative px-6 py-3 sm:py-3.5 text-sm sm:text-base bg-[#507c88] to-[#3d5f6a] text-white rounded-full font-semibold shadow-lg shadow-[#507c88]/30 hover:shadow-[#507c88]/50 transition-all duration-300  active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed animate-slide-up animation-delay-600 overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[#5d8d9a] to-[#507c88] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative flex items-center justify-center gap-2">
@@ -177,7 +179,7 @@ export default function Signin() {
             </button>
           </form>
 
-          <div className="relative my-6 animate-slide-up animation-delay-800">
+          <div className="relative my-5 sm:my-6 animate-slide-up animation-delay-800">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-200"></div>
             </div>
@@ -189,7 +191,7 @@ export default function Signin() {
           </div>
 
           <div className="grid grid-cols-1 gap-3 animate-slide-up animation-delay-1000">
-            <button className="flex items-center justify-center  px-4 py-3 bg-white border border-gray-200 rounded-full text-gray-700 hover:bg-gray-50 hover:border-[#507c88] transition-all duration-300 group">
+            <button className="flex items-center justify-center gap-2 px-4 py-3 text-sm sm:text-base bg-white border border-gray-200 rounded-full text-gray-700 hover:bg-gray-50 hover:border-[#507c88] transition-all duration-300 group">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -214,7 +216,7 @@ export default function Signin() {
 
           <p className="text-center text-sm text-gray-600 mt-6 animate-slide-up animation-delay-1200">
             Don't have an account?{" "}
-            <span className='underline underline-offset-4" text-blue-800'>
+            <span className="underline underline-offset-4 text-blue-800">
               <NavLink to="/signup">Signup</NavLink>
             </span>
           </p>

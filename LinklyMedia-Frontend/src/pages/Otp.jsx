@@ -127,18 +127,21 @@ export default function Otp() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-10 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">
+    <div>
+       <div className="w-full font-light text-sm text-center bg-[#507c88] h-[40px] text-white pt-2">LinklyMedia | Outdoor Advertising Platform</div>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-6 sm:py-8">
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-5 sm:p-8 md:p-10 w-full max-w-md">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
           Verify Your Account
         </h1>
 
-        <p className="text-gray-500 text-sm mb-8 leading-relaxed">
+        <p className="text-gray-500 text-sm mb-6 sm:mb-8 leading-relaxed">
           We've sent a 6-digit verification code to your{" "}
+          <br></br>
           <span className="font-bold text-gray-800 break-all">{email}</span>
         </p>
 
-        <div className="flex gap-3 justify-center mb-4">
+        <div className="grid grid-cols-6 gap-2 sm:gap-3 mb-4 max-w-[320px] mx-auto">
           {otp.map((digit, index) => (
             <input
               key={index}
@@ -150,7 +153,7 @@ export default function Otp() {
               onChange={(e) => handleChange(e.target.value, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={handlePaste}
-              className={`w-12 h-14 text-center text-xl font-semibold border rounded-lg outline-none transition-all duration-150
+              className={`w-full h-11 sm:h-14 text-center text-lg sm:text-xl font-semibold border rounded-lg outline-none transition-all duration-150
                 focus:ring-2 focus:ring-teal-500 focus:border-teal-500
                 ${digit ? "border-teal-500 bg-teal-50 text-teal-700" : "border-gray-300 bg-white text-gray-800"}
                 ${error ? "!border-red-400" : ""}
@@ -166,7 +169,7 @@ export default function Otp() {
         )}
 
         {resent && (
-          <p className="text-teal-600 text-sm text-center mb-2 font-medium">
+          <p className="text-[#507c88] text-sm text-center mb-2 font-medium">
             ✓ OTP resent successfully
           </p>
         )}
@@ -174,7 +177,7 @@ export default function Otp() {
         <button
           onClick={handleVerify}
           disabled={loading}
-          className="mt-8 w-full py-3 bg-[#507c88] hover:bg-[#3d6472] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-full transition-all duration-200 shadow-md shadow-teal-700/20"
+          className="mt-6 sm:mt-8 w-full py-3 bg-[#507c88] hover:bg-[#3d6472] disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm sm:text-base font-semibold rounded-full transition-all duration-200 shadow-md shadow-teal-700/20"
         >
           {loading ? (
             <span className="flex items-center justify-center gap-2">
@@ -215,6 +218,7 @@ export default function Otp() {
           {resending ? "Resending…" : "Resend OTP"}
         </p>
       </div>
+    </div>
     </div>
   );
 }

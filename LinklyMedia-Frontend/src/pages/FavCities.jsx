@@ -119,26 +119,29 @@ export default function FavCities() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6">
+    <div>
+            <div className="w-full font-light text-sm text-center bg-[#507c88] h-[40px] text-white pt-2">LinklyMedia | Outdoor Advertising Platform</div>
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-12 px-4 sm:px-6">
+      
       <div className="max-w-5xl mx-auto">
-        <div className="mb-10 text-center">
-          <h1 className="text-3xl font-black text-gray-900 tracking-tight mb-2">
+        <div className="mb-7 sm:mb-10 text-center">
+          <h1 className="text-2xl sm:text-3xl font-medium text-gray-900 tracking-tight mb-2">
             Select your Favourite Cities
           </h1>
-          <p className="text-gray-400 font-medium text-sm">
+          <p className="text-gray-400 font-medium text-xs sm:text-sm max-w-xl mx-auto">
             Choose the cities you're interested in — we'll show you relevant
             billboards.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-5 mb-6">
           {CITIES.map((city) => {
             const isSelected = selected.includes(city.id);
             return (
               <div
                 key={city.id}
                 onClick={() => toggle(city.id)}
-                className={`relative rounded-2xl overflow-hidden cursor-pointer group transition-all duration-200
+                className={`relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer group transition-all duration-200
                   ${
                     isSelected
                       ? "shadow-lg scale-[1.02]"
@@ -178,7 +181,7 @@ export default function FavCities() {
                 </div>
 
                 {isSelected && (
-                  <div className="absolute top-2.5 right-2.5 bg-[#507c88] text-white rounded-full w-7 h-7 flex items-center justify-center shadow-md">
+                  <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 bg-[#507c88] text-white rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center shadow-md">
                     <CheckIcon />
                   </div>
                 )}
@@ -187,7 +190,7 @@ export default function FavCities() {
           })}
         </div>
 
-        <div className="text-center mb-4">
+        <div className="text-center mb-4 px-1">
           {selected.length > 0 ? (
             <p className="text-sm text-[#507c88] font-semibold">
               {selected.length} {selected.length === 1 ? "city" : "cities"}{" "}
@@ -210,7 +213,7 @@ export default function FavCities() {
           <button
             onClick={handleNext}
             disabled={loading}
-            className="px-16 py-3.5 bg-[#507c88] hover:bg-[#3d6472] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-base rounded-full shadow-lg transition-all duration-200 active:scale-[0.98] flex items-center gap-2"
+            className="w-full sm:w-auto sm:min-w-[220px] px-6 sm:px-16 py-3 sm:py-3.5 bg-[#507c88] hover:bg-[#3d6472] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-sm sm:text-base rounded-full shadow-lg transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2"
           >
             {loading ? (
               <>
@@ -256,6 +259,7 @@ export default function FavCities() {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
