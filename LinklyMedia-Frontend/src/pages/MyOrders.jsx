@@ -24,7 +24,7 @@ const fmt = (d) =>
 const StatusPill = ({ status }) => {
   const s = STATUS_CONFIG[status] ?? { label: status, bg: "bg-gray-100", text: "text-gray-600", dot: "bg-gray-400" };
   return (
-    <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full ${s.bg} ${s.text}`}>
+    <span className={`inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 rounded-full ${s.bg} ${s.text}`}>
       <span className={`w-1.5 h-1.5 rounded-full ${s.dot} ${status === "LIVE" ? "animate-pulse" : ""}`} />
       {s.label}
     </span>
@@ -34,28 +34,30 @@ const StatusPill = ({ status }) => {
 const ProgressBar = ({ status }) => {
   const currentStep = STATUS_CONFIG[status]?.step ?? 0;
   return (
-    <div className="flex items-center gap-0">
-      {STEPS.map((step, idx) => {
-        const stepNum = idx + 1;
-        const done    = currentStep >= stepNum;
-        const isLast  = idx === STEPS.length - 1;
-        return (
-          <React.Fragment key={step.key}>
-            <div className="flex flex-col items-center">
-              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all
-                ${done ? "bg-teal-600 text-white" : "bg-gray-100 text-gray-400 border border-gray-200"}`}>
-                {done ? <CheckCircleIcon size={14} weight="fill" /> : stepNum}
+    <div className="overflow-x-auto -mx-1 px-1">
+      <div className="min-w-[520px] flex items-center gap-0">
+        {STEPS.map((step, idx) => {
+          const stepNum = idx + 1;
+          const done    = currentStep >= stepNum;
+          const isLast  = idx === STEPS.length - 1;
+          return (
+            <React.Fragment key={step.key}>
+              <div className="flex flex-col items-center">
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all
+                  ${done ? "bg-teal-600 text-white" : "bg-gray-100 text-gray-400 border border-gray-200"}`}>
+                  {done ? <CheckCircleIcon size={14} weight="fill" /> : stepNum}
+                </div>
+                <span className={`mt-1 text-[10px] font-medium whitespace-nowrap ${done ? "text-teal-600" : "text-gray-400"}`}>
+                  {step.label}
+                </span>
               </div>
-              <span className={`mt-1 text-[10px] font-medium whitespace-nowrap ${done ? "text-teal-600" : "text-gray-400"}`}>
-                {step.label}
-              </span>
-            </div>
-            {!isLast && (
-              <div className={`flex-1 h-0.5 mb-4 mx-1 rounded transition-all ${currentStep > stepNum ? "bg-teal-500" : "bg-gray-100"}`} />
-            )}
-          </React.Fragment>
-        );
-      })}
+              {!isLast && (
+                <div className={`flex-1 h-0.5 mb-4 mx-1 rounded transition-all ${currentStep > stepNum ? "bg-teal-500" : "bg-gray-100"}`} />
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -88,10 +90,10 @@ export default function MyOrders() {
   const toggle = (id) => setExpanded(prev => prev === id ? null : id);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10">
+    <div className="max-w-3xl mx-auto px-3 sm:px-4 py-6 sm:py-10 pb-8">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">My Orders</h1>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">My Orders</h1>
         <p className="text-sm text-gray-400 mt-1">Track all your billboard bookings</p>
       </div>
 
@@ -106,9 +108,9 @@ export default function MyOrders() {
       {loading && (
         <div className="space-y-4">
           {[1,2,3].map(i => (
-            <div key={i} className="rounded-2xl bg-white border border-gray-100 p-5 animate-pulse shadow-sm">
-              <div className="flex gap-4">
-                <div className="w-24 h-20 rounded-xl bg-gray-200 flex-shrink-0" />
+            <div key={i} className="rounded-2xl bg-white border border-gray-100 p-4 sm:p-5 animate-pulse shadow-sm">
+              <div className="flex gap-3 sm:gap-4">
+                <div className="w-20 h-16 sm:w-24 sm:h-20 rounded-xl bg-gray-200 flex-shrink-0" />
                 <div className="flex-1 space-y-2.5">
                   <div className="h-4 bg-gray-200 rounded w-2/3" />
                   <div className="h-3 bg-gray-100 rounded w-1/2" />
@@ -145,11 +147,11 @@ export default function MyOrders() {
             >
               {/* Clickable main row */}
               <div
-                className="flex gap-4 p-5 cursor-pointer"
+                className="flex gap-3 sm:gap-4 p-3 sm:p-5 cursor-pointer"
                 onClick={() => toggle(cardKey)}
               >
                 {/* Billboard image */}
-                <div className="w-24 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
+                <div className="w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
                   {b.coverImage
                     ? <img src={b.coverImage} alt={b.title} className="w-full h-full object-cover" />
                     : <div className="w-full h-full flex items-center justify-center text-3xl">🪧</div>
@@ -159,7 +161,7 @@ export default function MyOrders() {
                 {/* Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2 flex-wrap">
-                    <h3 className="text-sm font-semibold text-gray-900">{b.title}</h3>
+                    <h3 className="text-sm sm:text-base font-semibold text-gray-900 break-words">{b.title}</h3>
                     <StatusPill status={b.status} />
                   </div>
                   <div className="flex items-center gap-3 mt-2 flex-wrap">
@@ -168,7 +170,7 @@ export default function MyOrders() {
                       {fmt(b.fromDate)} → {fmt(b.toDate)}
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+                  <div className="hidden sm:flex items-center gap-3 mt-1.5 flex-wrap">
                     <span className="text-xs text-gray-400">
                       Material: <span className="font-medium text-gray-600">{b.material}</span>
                     </span>
@@ -188,7 +190,7 @@ export default function MyOrders() {
 
               {/* Expanded section — tracking + details */}
               {isOpen && (
-                <div className="border-t border-gray-100 bg-gray-50/60 px-5 py-5 space-y-5">
+                <div className="border-t border-gray-100 bg-gray-50/60 px-3 sm:px-5 py-4 sm:py-5 space-y-4 sm:space-y-5">
 
                   {/* Progress tracker */}
                   <div>
@@ -205,10 +207,10 @@ export default function MyOrders() {
                         { label: "Confirmed",    value: b.confirmedAt },
                         { label: "Went Live",    value: b.liveAt      },
                       ].filter(t => t.value).map(({ label, value }) => (
-                        <div key={label} className="flex items-center gap-3">
+                        <div key={label} className="flex items-center gap-2.5 sm:gap-3">
                           <ClockIcon size={13} className="text-teal-500 flex-shrink-0" />
-                          <span className="text-xs text-gray-500 w-28">{label}</span>
-                          <span className="text-xs font-medium text-gray-700">{fmt(value)}</span>
+                          <span className="text-xs text-gray-500 w-24 sm:w-28">{label}</span>
+                          <span className="text-xs font-medium text-gray-700 break-words">{fmt(value)}</span>
                         </div>
                       ))}
                     </div>
@@ -221,7 +223,7 @@ export default function MyOrders() {
                       <div className="flex gap-2 flex-wrap">
                         {b.mountingProof.photos.map((url, i) => (
                           <a key={i} href={url} target="_blank" rel="noopener noreferrer">
-                            <img src={url} alt={`Proof ${i+1}`} className="h-24 w-32 rounded-xl object-cover border border-gray-200 hover:opacity-90 transition" />
+                            <img src={url} alt={`Proof ${i+1}`} className="h-20 w-28 sm:h-24 sm:w-32 rounded-xl object-cover border border-gray-200 hover:opacity-90 transition" />
                           </a>
                         ))}
                       </div>
@@ -254,7 +256,6 @@ export default function MyOrders() {
           );
         })}
       </div>
-      <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
     </div>
   );
 }

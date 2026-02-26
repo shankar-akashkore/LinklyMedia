@@ -105,9 +105,9 @@ export default function PreviewCheckout() {
   const finalTotal = subtotal + totalGST - discount;
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6">
+    <div className="min-h-screen bg-slate-50 py-6 px-3 sm:py-8 sm:px-6 pb-8">
       <div className="max-w-6xl mx-auto mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">
+        <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900">
           Preview Checkout
         </h1>
         <p className="text-sm text-slate-500 mt-1">
@@ -115,7 +115,7 @@ export default function PreviewCheckout() {
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-1 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6">
         {/* LEFT */}
         <div className="lg:col-span-1 flex flex-col gap-6">
           {cart.length === 0 && (
@@ -139,7 +139,7 @@ export default function PreviewCheckout() {
             return (
               <div
                 key={item.cartItemId || idx}
-                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm"
+                className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm"
               >
                 <div className="flex flex-col sm:flex-row gap-5">
                   <div className="w-full sm:w-36 h-24 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-200 overflow-hidden">
@@ -153,10 +153,10 @@ export default function PreviewCheckout() {
                   </div>
 
                   <div className="flex-1">
-                    <h2 className="font-semibold text-lg text-slate-800">
+                    <h2 className="font-semibold text-base sm:text-lg text-slate-800 break-words">
                       {item.title}
                     </h2>
-                    <p className="text-sm text-gray-500 mb-3">
+                    <p className="text-xs sm:text-sm text-gray-500 mb-3 break-words">
                       {fmtDate(item.fromDate)} → {fmtDate(item.toDate)} ({days}{" "}
                       days)
                     </p>
@@ -213,8 +213,86 @@ export default function PreviewCheckout() {
           })}
         </div>
 
+        {/* Mobile Order Summary */}
+        <div className="lg:hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5 h-fit">
+          <h2 className="font-semibold text-slate-800 mb-4">Order Summary</h2>
+
+          <div className="space-y-3 text-sm text-slate-600">
+            <div className="flex justify-between">
+              <span>Subtotal</span>
+              <span className="font-medium text-slate-800">{fmt(subtotal)}</span>
+            </div>
+
+            <div className="flex justify-between">
+              <span>GST</span>
+              <span className="font-medium text-slate-800">{fmt(totalGST)}</span>
+            </div>
+
+            {discount > 0 && (
+              <div className="flex justify-between text-green-600">
+                <span>Discount</span>
+                <span>- {fmt(discount)}</span>
+              </div>
+            )}
+
+            <div className="flex justify-between font-bold text-lg border-t border-slate-200 pt-3">
+              <span>Total</span>
+              <span className="text-[#507c88]">{fmt(finalTotal)}</span>
+            </div>
+          </div>
+
+          <div className="mt-4 border-t pt-4">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Enter coupon"
+                value={coupon}
+                onChange={(e) => setCoupon(e.target.value.toUpperCase())}
+                className="flex-1 border border-slate-300 px-3 py-2 rounded-xl text-center text-sm outline-none focus:ring-2 focus:ring-[#507c88]/25"
+              />
+              <button
+                disabled={applying}
+                onClick={handleApplyCoupon}
+                className="bg-[#507c88] text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#3d6472] disabled:opacity-50"
+              >
+                {applying ? "Applying..." : "Apply"}
+              </button>
+            </div>
+
+            {couponApplied && (
+              <p className="text-green-600 text-xs mt-2">
+                Applied: {couponApplied}
+              </p>
+            )}
+          </div>
+
+          <button
+            onClick={() => navigate("/payment")}
+            disabled={cart.length === 0}
+            className="mt-6 w-full py-3 font-semibold transition 
+            items-center justify-center rounded-full 
+            relative isolate gap-2
+            px-1 py-1
+            text-xs sm:text-base font-normal tracking-wide font-[var(--font-barriecito)]
+            text-white bg-[#507c88]
+            border-1 border-[#507c88] 
+            overflow-hidden
+            transition-all duration-300
+            hover:text-[#507c88]
+            active:scale-95
+            
+            before:absolute before:inset-0
+            before:bg-white
+            before:translate-y-full
+            before:transition-transform before:duration-300
+            before:z-0
+            hover:before:translate-y-0">
+            <span className="relative z-10">Confirm & Place Order</span>
+          </button>
+        </div>
+
         {/* RIGHT */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 h-fit sticky top-6">
+        <div className="hidden lg:block bg-white rounded-2xl shadow-sm border border-slate-200 p-5 h-fit sticky top-6">
           <h2 className="font-semibold text-slate-800 mb-4">Order Summary</h2>
 
           <div className="space-y-3 text-sm text-slate-600">
@@ -249,7 +327,7 @@ export default function PreviewCheckout() {
                 placeholder="Enter coupon"
                 value={coupon}
                 onChange={(e) => setCoupon(e.target.value.toUpperCase())}
-                className="flex border border-slate-300 px-3 py-2 rounded-xl text-center text-sm outline-none focus:ring-2 focus:ring-[#507c88]/25"
+                className="flex-1 border border-slate-300 px-3 py-2 rounded-xl text-center text-sm outline-none focus:ring-2 focus:ring-[#507c88]/25"
               />
               <button
                 disabled={applying}
@@ -269,7 +347,7 @@ export default function PreviewCheckout() {
 
           <button
             onClick={() => navigate("/payment")}
-            className="mt-6 w-[300px] py-3 font-semibold transition 
+            className="mt-6 w-full py-3 font-semibold transition 
             items-center justify-center rounded-full 
             relative isolate gap-2
             px-1 py-1
@@ -296,6 +374,7 @@ export default function PreviewCheckout() {
           </button> */}
         </div>
       </div>
+
     </div>
   );
 }

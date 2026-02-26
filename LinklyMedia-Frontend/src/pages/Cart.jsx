@@ -67,7 +67,7 @@ export default function Cart() {
   const total = subtotal;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 py-6 px-3 sm:py-8 sm:px-6 pb-28 sm:pb-8">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 py-6 px-3 sm:py-8 sm:px-6 pb-8">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
         <div className="mb-4 sm:mb-6 rounded-2xl bg-white/80 backdrop-blur border border-slate-200 px-4 sm:px-5 py-4 shadow-sm">
@@ -120,12 +120,12 @@ export default function Cart() {
                       key={item.cartItemId}
                       className="bg-white border border-slate-200 rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
                     >
-                      <div className="flex flex-col sm:flex-row gap-4">
+                      <div className="flex flex-row sm:flex-row gap-3 sm:gap-4">
                         {/* Image */}
                         <img
                           src={item.coverImage}
                           alt={item.title}
-                          className="w-full sm:w-40 h-24 sm:h-28 object-cover rounded-xl shrink-0 border border-slate-200"
+                          className="w-24 h-20 sm:w-40 sm:h-28 object-cover rounded-xl shrink-0 border border-slate-200"
                         />
 
                         {/* Details */}
@@ -142,9 +142,13 @@ export default function Cart() {
                             </button>
                           </div>
 
+                          <p className="text-base sm:hidden font-extrabold text-[#2c6e7d] mt-1">
+                            ₹{Number(itemTotal).toLocaleString()}
+                          </p>
+
                           {/* Dates */}
                           {item.fromdate && item.todate && (
-                            <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                            <div className="hidden sm:flex items-center gap-2 mt-1.5 flex-wrap">
                               <span className="text-xs text-slate-500 break-words">
                                 {fmt(item.fromdate)} → {fmt(item.todate)}
                               </span>
@@ -157,7 +161,7 @@ export default function Cart() {
                           )}
 
                           {/* Material / Mounting tags */}
-                          <div className="flex gap-1.5 sm:gap-2 mt-2 flex-wrap">
+                          <div className="hidden sm:flex gap-1.5 sm:gap-2 mt-2 flex-wrap">
                             {item.selectedmaterial && (
                               <span className="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-medium">
                                 📄 {item.selectedmaterial}
@@ -171,7 +175,7 @@ export default function Cart() {
                           </div>
 
                           {/* Price breakdown */}
-                          <div className="flex flex-col sm:flex-row sm:items-end justify-between mt-3 gap-2">
+                          <div className="hidden sm:flex flex-col sm:flex-row sm:items-end justify-between mt-3 gap-2">
                             <div className="text-xs text-slate-500 space-y-0.5">
                               {item.price > 0 && (
                                 <p>
@@ -202,6 +206,57 @@ export default function Cart() {
                 })}
               </div>
             )}
+          </div>
+
+          {/* Mobile Order Summary */}
+          <div className="xl:hidden bg-white border border-slate-200 rounded-2xl shadow-sm p-4">
+            <h2 className="text-base font-bold text-slate-800 mb-3">
+              Order Summary
+            </h2>
+
+            <div className="space-y-2.5 text-sm">
+              <div className="flex justify-between text-slate-500">
+                <span>Subtotal ({cartItems.length} items)</span>
+                <span className="font-medium text-slate-700">
+                  ₹{subtotal.toLocaleString()}
+                </span>
+              </div>
+
+              <div className="border-t border-slate-200 pt-2.5 flex justify-between">
+                <span className="font-bold text-slate-800">Total</span>
+                <span className="font-bold text-lg text-[#2c6e7d]">
+                  ₹{total.toLocaleString()}
+                </span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigate("/preview-checkout")}
+              disabled={cartItems.length === 0}
+              className="w-full mt-5 py-3 font-semibold text-sm rounded-full transition disabled:opacity-40 disabled:cursor-not-allowed
+                items-center justify-center
+                relative isolate gap-2
+                px-1 py-1
+                text-xs sm:text-base font-normal tracking-wide font-[var(--font-barriecito)]
+                text-white bg-[#507c88]
+                border-1 border-[#507c88] rounded-full
+                overflow-hidden
+                transition-all duration-300
+                hover:text-[#507c88] 
+                active:scale-95
+            
+                before:absolute before:inset-0
+                before:bg-white
+                before:translate-y-full
+                before:transition-transform before:duration-300
+                before:z-0
+                hover:before:translate-y-0">
+               <span className="relative z-10">Proceed to Checkout →</span>
+            </button>
+
+            <p className="text-center text-xs text-slate-400 mt-2.5">
+              Secure checkout
+            </p>
           </div>
 
           {/* ── Order Summary ── */}
@@ -259,26 +314,6 @@ export default function Cart() {
         </div>
       </div>
 
-      {/* Mobile Bottom Checkout Bar */}
-      <div className="xl:hidden fixed bottom-0 inset-x-0 z-20 border-t border-slate-200 bg-white/95 backdrop-blur px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-          <div className="min-w-0">
-            <p className="text-[11px] text-slate-500">
-              {cartItems.length} item{cartItems.length !== 1 ? "s" : ""}
-            </p>
-            <p className="text-lg font-bold text-[#2c6e7d] leading-tight">
-              ₹{total.toLocaleString()}
-            </p>
-          </div>
-          <button
-            onClick={() => navigate("/preview-checkout")}
-            disabled={cartItems.length === 0}
-            className="shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-[#507c88] disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            Checkout
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
