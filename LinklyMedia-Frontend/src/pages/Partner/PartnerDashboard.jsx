@@ -88,37 +88,37 @@ export default function PartnerDashboard() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Navbar */}
-      <header className="w-full h-[52px] bg-[#507c88] flex items-center justify-between px-5 shadow-md shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">
+      <header className="h-[100px] w-full bg-[#507c88] flex items-center justify-between px-3 sm:px-5 py-2 sm:h-[52px] shadow-md shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 bg-white/20 rounded-xl flex items-center justify-center border border-white/30 shrink-0">
             <img
               src="/images/logo.jpeg"
               alt="Linkly Media"
-              className="w-6 h-6 rounded-md object-cover"
+              className="w-5 h-5 sm:w-6 sm:h-6 rounded-md object-cover"
             />
           </div>
-          <span className="text-white font-semibold text-base tracking-wide uppercase">
+          <span className="text-white font-semibold text-sm sm:text-base tracking-wide uppercase truncate">
             Linkly Media
           </span>
-          <span className="px-2.5 py-0.5 bg-white/20 border border-white/30 rounded-full text-white text-xs font-medium">
+          <span className="hidden sm:inline-flex px-2.5 py-0.5 bg-white/20 border border-white/30 rounded-full text-white text-xs font-medium">
             Partner
           </span>
         </div>
 
         <button
           onClick={handleLogout}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/25 border border-white/30 rounded-lg text-white text-sm transition-colors duration-150"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-white/10 hover:bg-white/25 border border-white/30 rounded-full text-white text-xs sm:text-sm transition-colors duration-150 shrink-0"
         >
           <SignOut size={15} />
-          Logout
+          <span className="hidden sm:inline">Logout</span>
         </button>
       </header>
 
       {/* Body */}
-      <div className="flex flex-1 p-3 gap-3 overflow-hidden">
+      <div className="flex flex-col lg:flex-row flex-1 p-2 sm:p-3 gap-2 sm:gap-3 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-56 shrink-0 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col overflow-hidden">
-          <div className="px-4 py-3 border-b border-gray-100">
+        <aside className="w-full lg:w-56 shrink-0 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col overflow-hidden">
+          <div className="hidden lg:block px-4 py-3 border-b border-gray-100">
             <Link
               to="/partner"
               className="text-xs font-semibold text-gray-600 uppercase tracking-widest hover:text-[#507c88] transition-colors"
@@ -127,13 +127,14 @@ export default function PartnerDashboard() {
             </Link>
           </div>
 
-          <nav className="flex-1 py-2">
+          <nav className="flex-1 py-2 lg:py-2 overflow-x-auto lg:overflow-visible">
+            <div className="flex lg:block px-2 lg:px-0 gap-2 lg:gap-0 min-w-max lg:min-w-0">
             {NAV_ITEMS.map(({ label, icon: Icon, path, badge }) => (
               <NavLink
                 key={path}
                 to={path}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 mx-2 px-3 py-2.5 rounded-lg text-md font-large transition-colors duration-100 ` +
+                  `flex items-center gap-2 lg:gap-3 mx-0 lg:mx-2 px-3 py-2 lg:py-2.5 rounded-lg text-sm lg:text-md font-medium transition-colors duration-100 whitespace-nowrap ` +
                   (isActive
                     ? "bg-[#507c88]/20 text-[#507c88]"
                     : "text-gray-800 hover:bg-gray-100 hover:text-gray-1000")
@@ -153,11 +154,12 @@ export default function PartnerDashboard() {
                 )}
               </NavLink>
             ))}
+            </div>
           </nav>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm overflow-auto">
+        <main className="flex-1 min-h-0 bg-white rounded-xl border border-gray-200 shadow-sm overflow-auto">
           <Outlet />
         </main>
       </div>

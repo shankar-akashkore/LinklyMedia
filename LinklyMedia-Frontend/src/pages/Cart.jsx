@@ -104,7 +104,7 @@ export default function Cart() {
                 </p>
                 <button
                   onClick={() => navigate("/billboards")}
-                  className="mt-6 px-6 py-2.5 bg-[#2c6e7d] text-white text-sm font-semibold rounded-xl hover:bg-[#235865] transition"
+                  className="mt-6 px-6 py-2.5 bg-[#2c6e7d] text-white text-sm font-semibold rounded-full hover:bg-[#235865] transition"
                 >
                   Browse Billboards
                 </button>

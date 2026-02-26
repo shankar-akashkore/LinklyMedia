@@ -44,10 +44,10 @@ export default function BookingsTable({ bookings, loading, error, onRefresh, tit
   };
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       {title && (
-        <div className="mb-6">
-          <h2 className="text-lg font-bold text-gray-800">{title}</h2>
+        <div className="mb-5 sm:mb-6">
+          <h2 className="text-base sm:text-lg font-bold text-gray-800">{title}</h2>
           {bookings?.length > 0 && (
             <p className="text-sm text-gray-400 mt-0.5">{bookings.length} booking{bookings.length > 1 ? "s" : ""}</p>
           )}
@@ -70,8 +70,8 @@ export default function BookingsTable({ bookings, loading, error, onRefresh, tit
           {bookings.map((b) => (
             <div key={b.orderId} className="border border-gray-200 rounded-xl bg-white overflow-hidden">
               {/* Order header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-100 cursor-pointer hover:bg-gray-100 transition" onClick={() => navigate("/partner/orders/" + b.orderId, { state: { booking: b } })}>
-                <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 py-3 bg-gray-50 border-b border-gray-100 cursor-pointer hover:bg-gray-100 transition" onClick={() => navigate("/partner/orders/" + b.orderId, { state: { booking: b } })}>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   <span className="text-xs font-mono text-gray-600">#{b.orderId?.slice(-8)}</span>
                   <span className={`px-2 py-0.5 rounded-full border text-xs font-medium ${STATUS_STYLES[b.orderStatus] ?? STATUS_STYLES.EXPIRED}`}>
                     {b.orderStatus}
@@ -82,7 +82,7 @@ export default function BookingsTable({ bookings, loading, error, onRefresh, tit
                     {b.paymentStatus}
                   </span>
                 </div>
-                <span className="text-xs text-gray-800">{fmt(b.createdAt)}</span>
+                <span className="text-xs text-gray-800 sm:text-right">{fmt(b.createdAt)}</span>
               </div>
 
               {/* Partner items */}
@@ -90,7 +90,8 @@ export default function BookingsTable({ bookings, loading, error, onRefresh, tit
                 {b.partnerItems?.map((item) => {
                   const actions = STATUS_ACTIONS[item.status] ?? [];
                   return (
-                    <div key={item.cartItemId} className="flex items-center gap-4 px-4 py-3">
+                    <div key={item.cartItemId} className="px-4 py-3">
+                      <div className="flex items-start gap-3 sm:gap-4">
                       {/* Cover image */}
                       {item.coverImage ? (
                         <img src={item.coverImage} alt={item.title}
@@ -115,31 +116,34 @@ export default function BookingsTable({ bookings, loading, error, onRefresh, tit
                         <p className="text-sm font-bold text-gray-800">₹{Number(item.price).toLocaleString()}</p>
                         <p className="text-xs text-gray-400">/ day</p>
                       </div>
+                      </div>
 
                       {/* Item status */}
-                      <span className={`px-2 py-0.5 rounded-full border text-xs font-medium shrink-0 ${STATUS_STYLES[item.status] ?? STATUS_STYLES.EXPIRED}`}>
-                        {item.status}
-                      </span>
+                      <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <span className={`px-2 py-0.5 rounded-full border text-xs font-medium shrink-0 ${STATUS_STYLES[item.status] ?? STATUS_STYLES.EXPIRED}`}>
+                          {item.status}
+                        </span>
 
-                      {/* Actions */}
-                      {actions.length > 0 && (
-                        <div className="flex gap-1.5 shrink-0">
-                          {actions.map((s) => {
-                            const key = b.orderId + item.cartItemId + s;
-                            return (
-                              <button key={s} disabled={!!acting}
-                                onClick={() => handleAction(b.orderId, item.cartItemId, s)}
-                                className={`px-2.5 py-1 text-xs rounded-lg border font-medium transition capitalize disabled:opacity-50 ${
-                                  s === "CONFIRMED" || s === "COMPLETED"
-                                    ? "border-emerald-200 text-emerald-600 hover:bg-emerald-50"
-                                    : "border-red-200 text-red-500 hover:bg-red-50"
-                                }`}>
-                                {acting === key ? "…" : s.toLowerCase()}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      )}
+                        {/* Actions */}
+                        {actions.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 shrink-0">
+                            {actions.map((s) => {
+                              const key = b.orderId + item.cartItemId + s;
+                              return (
+                                <button key={s} disabled={!!acting}
+                                  onClick={() => handleAction(b.orderId, item.cartItemId, s)}
+                                  className={`px-2.5 py-1 text-xs rounded-lg border font-medium transition capitalize disabled:opacity-50 ${
+                                    s === "CONFIRMED" || s === "COMPLETED"
+                                      ? "border-emerald-200 text-emerald-600 hover:bg-emerald-50"
+                                      : "border-red-200 text-red-500 hover:bg-red-50"
+                                  }`}>
+                                  {acting === key ? "…" : s.toLowerCase()}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
@@ -147,13 +151,13 @@ export default function BookingsTable({ bookings, loading, error, onRefresh, tit
 
               {/* Financial summary */}
               <div className="px-4 py-3 bg-gray-50 border-t border-gray-100">
-                <div className="flex items-center justify-between text-xs text-gray-500">
-                  <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-gray-500">
+                  <div className="flex flex-wrap gap-3 sm:gap-4">
                     <span>Base Rent: <strong className="text-gray-700">₹{Number(b.baseRentTotal).toLocaleString()}</strong></span>
                     <span>GST: <strong className="text-gray-700">₹{Number(b.gst).toLocaleString()}</strong></span>
                     <span>Commission: <strong className="text-gray-700">₹{Number(b.commission).toLocaleString()}</strong></span>
                   </div>
-                  <div className="text-right">
+                  <div className="text-left sm:text-right">
                     <span className="text-gray-500">Net Payout: </span>
                     <strong className="text-[#507c88] text-sm">₹{Number(b.netPayout).toLocaleString()}</strong>
                   </div>

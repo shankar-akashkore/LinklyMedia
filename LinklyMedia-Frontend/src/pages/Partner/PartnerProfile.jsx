@@ -18,7 +18,7 @@ const Field = ({ label, value, field, type = "text", editing, onChange, readOnly
           type={type}
           value={value ?? ""}
           onChange={(e) => onChange(field, e.target.value)}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 font-normal focus:outline-none focus:ring-2 focus:ring-[#507c88]/40 focus:border-[#507c88]"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 font-normal focus:outline-none focus:ring-2 focus:ring-[#507c88]/40 focus:border-[#507c88]"
         />
       )
     ) : (
@@ -129,25 +129,27 @@ export default function PartnerProfile() {
   };
 
   return (
-    <div className="p-6 max-w-2xl">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 sm:p-6 max-w-2xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
-          <h2 className="text-lg font-bold text-gray-800">Profile</h2>
+          <h2 className="text-base sm:text-lg font-bold text-gray-800">
+            Profile
+          </h2>
           <p className="text-sm text-gray-400">Manage your partner account details</p>
         </div>
         {!editing ? (
           <button onClick={() => setEditing(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 bg-[#507c88] rounded-lg text-sm text-white hover:bg-[#507c88]/80 transition">
+            className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3 py-2 border border-gray-200 bg-[#507c88] rounded-full text-sm text-white hover:bg-[#507c88]/80 transition">
             <PencilSimpleIcon size={15} /> Edit
           </button>
         ) : (
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
             <button onClick={() => { setEditing(false); setForm(profile); }}
-              className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-500 hover:bg-gray-50 transition">
+              className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-500 hover:bg-gray-50 transition">
               <XIcon size={14} /> Cancel
             </button>
             <button onClick={handleSave} disabled={saving}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#507c88] text-white rounded-lg text-sm hover:bg-[#3d6370] transition disabled:opacity-60">
+              className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3 py-2 bg-[#507c88] text-white rounded-lg text-sm hover:bg-[#3d6370] transition disabled:opacity-60">
               <CheckIcon size={14} /> {saving ? "Saving…" : "Save"}
             </button>
           </div>

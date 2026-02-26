@@ -41,11 +41,13 @@ export default function PartnerHistory() {
   const toggle = (id) => setExpanded((prev) => (prev === id ? null : id));
 
   return (
-    <div className="p-6 space-y-5">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-5">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">History</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+            History
+          </h1>
           <p className="text-sm text-gray-400 mt-0.5">Completed orders</p>
         </div>
         {!loading && !error && (
@@ -68,10 +70,10 @@ export default function PartnerHistory() {
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="rounded-2xl bg-white border border-gray-100 p-5 animate-pulse shadow-sm"
+              className="rounded-2xl bg-white border border-gray-100 p-4 sm:p-5 animate-pulse shadow-sm"
             >
               <div className="flex gap-4">
-                <div className="w-20 h-20 rounded-xl bg-gray-200 flex-shrink-0" />
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gray-200 flex-shrink-0" />
                 <div className="flex-1 space-y-2.5">
                   <div className="h-4 bg-gray-200 rounded w-1/2" />
                   <div className="h-3 bg-gray-100 rounded w-1/3" />
@@ -85,7 +87,7 @@ export default function PartnerHistory() {
 
       {/* Empty */}
       {!loading && !error && bookings.length === 0 && (
-        <div className="flex flex-col items-center justify-center py-28 text-center">
+        <div className="flex flex-col items-center justify-center py-16 sm:py-28 text-center">
           <div className="text-5xl mb-4">📋</div>
           <p className="text-gray-500 font-medium">No completed orders yet</p>
           <p className="text-sm text-gray-400 mt-1">
@@ -107,11 +109,11 @@ export default function PartnerHistory() {
                 <div key={item.cartItemId}>
                   {idx > 0 && <hr className="border-gray-100 mx-5" />}
                   <div
-                    className="flex gap-4 p-5 cursor-pointer"
+                    className="flex gap-3 sm:gap-4 p-4 sm:p-5 cursor-pointer"
                     onClick={() => toggle(order.orderId)}
                   >
                     {/* Billboard Image */}
-                    <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
                       {item.coverImage ? (
                         <img
                           src={item.coverImage}
@@ -127,7 +129,7 @@ export default function PartnerHistory() {
 
                     {/* Info */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-3">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3">
                         <h3 className="text-sm font-semibold text-gray-900 truncate">
                           {item.title}
                         </h3>
@@ -167,7 +169,7 @@ export default function PartnerHistory() {
 
                     {/* Expand arrow */}
                     <div
-                      className={`self-center text-gray-300 transition-transform duration-200 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`}
+                      className={`self-center text-gray-300 transition-transform duration-200 flex-shrink-0 hidden sm:block ${isOpen ? "rotate-180" : ""}`}
                     >
                       <svg
                         className="w-4 h-4"
@@ -189,7 +191,7 @@ export default function PartnerHistory() {
 
               {/* Expanded Financial Details */}
               {isOpen && (
-                <div className="border-t border-gray-100 bg-gray-50/60 px-5 py-4 space-y-4">
+                <div className="border-t border-gray-100 bg-gray-50/60 px-4 sm:px-5 py-4 space-y-4">
                   {/* Design Preview */}
                   {order.partnerItems[0]?.design?.url && (
                     <div>
@@ -199,7 +201,7 @@ export default function PartnerHistory() {
                       <img
                         src={order.partnerItems[0].design.url}
                         alt="Design"
-                        className="h-28 rounded-xl object-cover border border-gray-200"
+                        className="h-24 sm:h-28 w-full sm:w-auto rounded-xl object-cover border border-gray-200"
                       />
                     </div>
                   )}
@@ -217,7 +219,7 @@ export default function PartnerHistory() {
                               key={i}
                               src={url}
                               alt={`Proof ${i + 1}`}
-                              className="h-24 w-32 rounded-xl object-cover border border-gray-200"
+                              className="h-20 w-24 sm:h-24 sm:w-32 rounded-xl object-cover border border-gray-200"
                             />
                           ),
                         )}
@@ -230,7 +232,7 @@ export default function PartnerHistory() {
                     <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
                       Financials
                     </p>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                       {[
                         {
                           label: "Base Rent",

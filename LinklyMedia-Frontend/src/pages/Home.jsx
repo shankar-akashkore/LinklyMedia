@@ -54,7 +54,7 @@ export default function Home() {
 
         {/* ── Hero headline ── */}
         <div className="mb-5 text-center sm:mb-6" style={{ animation: "fadeSlideUp 0.7s 0.1s ease both" }}>
-          <h1 className="text-[clamp(2.2rem,11vw,7rem)] font-medium leading-[0.95] tracking-tight text-gray-900">
+          <h1 className="text-[clamp(2.2rem,11vw,7rem)] font-light leading-[0.95] tracking-tight text-gray-900">
             Target{" "}
             <span className="relative inline-block">
               <span className="relative z-10 text-[#507c88]">Smart,</span>

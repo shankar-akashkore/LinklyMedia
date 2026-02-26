@@ -98,9 +98,9 @@ function getNameFromToken() {
 }
 
 const SkeletonStat = () => (
-  <div className="rounded-2xl bg-white border border-gray-100 p-5 animate-pulse shadow-sm">
-    <div className="w-10 h-10 rounded-xl bg-gray-100 mb-4" />
-    <div className="h-7 bg-gray-200 rounded-lg w-2/3 mb-2" />
+  <div className="rounded-2xl bg-white border border-gray-100 p-4 sm:p-5 animate-pulse shadow-sm">
+    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gray-100 mb-3 sm:mb-4" />
+    <div className="h-6 sm:h-7 bg-gray-200 rounded-lg w-2/3 mb-2" />
     <div className="h-3 bg-gray-100 rounded w-1/2" />
   </div>
 );
@@ -127,16 +127,16 @@ export default function PartnerHome() {
   }, []);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-5 sm:space-y-6">
       {/* Welcome Banner */}
-      <div className="rounded-2xl bg-gradient-to-r from-[#507c88] to-[#3d6370] p-7 text-white shadow-md relative overflow-hidden">
+      <div className="rounded-2xl bg-gradient-to-r from-[#507c88] to-[#3d6370] p-5 sm:p-7 text-white shadow-md relative overflow-hidden">
         {/* Decorative circles */}
-        <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
-        <div className="absolute -bottom-10 right-24 w-28 h-28 rounded-full bg-white/5 pointer-events-none" />
+        <div className="absolute -top-8 -right-8 w-28 h-28 sm:w-40 sm:h-40 rounded-full bg-white/5 pointer-events-none" />
+        <div className="absolute -bottom-10 right-12 sm:right-24 w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-white/5 pointer-events-none" />
 
         <p className="text-sm text-white/70 mb-1 font-medium">Welcome back,</p>
-        <h1 className="text-3xl font-bold tracking-tight">{partnerName}</h1>
-        <p className="text-sm text-white/60 mt-1.5">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight break-words">{partnerName}</h1>
+        <p className="text-xs sm:text-sm text-white/60 mt-1.5">
           Here's what's happening with your listings today.
         </p>
       </div>
@@ -150,7 +150,7 @@ export default function PartnerHome() {
 
       {/* Skeleton */}
       {loading && (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {[...Array(8)].map((_, i) => (
             <SkeletonStat key={i} />
           ))}
@@ -159,23 +159,23 @@ export default function PartnerHome() {
 
       {/* Stats Grid */}
       {data && (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {STAT_CONFIG.map(
             ({ key, label, icon: Icon, bg, iconColor, valueColor, format }) => (
               <div
                 key={key}
-                className="rounded-2xl bg-white border border-gray-200 p-5 flex flex-col gap-3 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                className="rounded-2xl bg-white border border-gray-200 p-4 sm:p-5 flex flex-col gap-2 sm:gap-3 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
               >
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center ${bg}`}
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center ${bg}`}
                 >
-                  <Icon size={20} weight="fill" className={iconColor} />
+                  <Icon size={18} weight="fill" className={iconColor} />
                 </div>
                 <div>
-                  <p className={`text-2xl font-bold ${valueColor}`}>
+                  <p className={`text-xl sm:text-2xl font-bold ${valueColor} break-words`}>
                     {format(data[key])}
                   </p>
-                  <p className="text-xs text-gray-600 mt-0.5 font-black pt-2">
+                  <p className="text-xs text-gray-600 mt-0.5 font-black pt-1.5 sm:pt-2">
                     {label}
                   </p>
                 </div>
