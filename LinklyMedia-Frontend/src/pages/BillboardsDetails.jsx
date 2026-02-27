@@ -32,6 +32,7 @@ export default function BillboardsDetails() {
   const [bookingStartMinDate] = useState(
     () => new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
   );
+  const [notLoggedIn, setNotLoggedIn] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/billboard/${id}`)
@@ -168,6 +169,12 @@ export default function BillboardsDetails() {
             ✓ Added to cart successfully!
           </div>
         )}
+        
+        {notLoggedIn && (
+          <div className="fixed right-3 top-3 z-50 rounded-xl bg-red-400 px-4 py-2.5 text-sm font-medium text-white shadow-lg sm:right-5 sm:top-5 sm:px-5 sm:py-3 sm:text-sm">
+            Please sign in to add items to cart
+            </div>
+          )}
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
           <div className="space-y-5">
@@ -290,7 +297,15 @@ export default function BillboardsDetails() {
 
             <div className="pt-4">
               <button
-                onClick={() => setShowDateModal(true)}
+                onClick={() => {
+                  const token = localStorage.getItem("token");
+                  if (!token) {
+                    setNotLoggedIn(true);
+                    setTimeout(() => setNotLoggedIn(false), 3000);
+                    return;
+                  }
+                  setShowDateModal(true);
+                }}
                 className="h-[40px] w-full rounded-2xl text-xs
                 relative inline-block text-center text-[18px] tracking-[1px]
                 text-[#507c88] bg-transparent cursor-pointer
